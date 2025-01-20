@@ -19,3 +19,9 @@ export const insertProductSchema = z.object({
       "价格格式不正确"
     ),
 });
+
+// Schema for signing users in
+export const signInFormSchema = z.object({
+  email: z.string().email("邮箱格式不正确"),
+  password: z.string().min(6, "密码至少6个字符"),
+});

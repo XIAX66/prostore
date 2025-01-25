@@ -1,9 +1,24 @@
 .
 ├── README.md
 ├── app
+│   ├── (auth)
+│   │   ├── layout.tsx
+│   │   ├── sign-in
+│   │   │   ├── credentials-signin-form.tsx
+│   │   │   └── page.tsx
+│   │   └── sign-up
+│   │       ├── page.tsx
+│   │       └── sign-up-form.tsx
 │   ├── (root)
 │   │   ├── layout.tsx
-│   │   └── page.tsx
+│   │   ├── page.tsx
+│   │   └── product
+│   │       └── [slug]
+│   │           └── page.tsx
+│   ├── api
+│   │   └── auth
+│   │       └── [...nextauth]
+│   │           └── route.ts
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
@@ -11,21 +26,27 @@
 │   └── not-found.tsx
 ├── assets
 │   └── loader.gif
+├── auth.ts
 ├── components
 │   ├── footer.tsx
 │   ├── shared
 │   │   ├── header
 │   │   │   ├── index.tsx
 │   │   │   ├── menu.tsx
-│   │   │   └── mode-toggle.tsx
+│   │   │   ├── mode-toggle.tsx
+│   │   │   └── user-button.tsx
 │   │   └── product
 │   │       ├── product-card.tsx
+│   │       ├── product-images.tsx
 │   │       ├── product-list.tsx
 │   │       └── product-price.tsx
 │   └── ui
+│       ├── badge.tsx
 │       ├── button.tsx
 │       ├── card.tsx
 │       ├── dropdown-menu.tsx
+│       ├── input.tsx
+│       ├── label.tsx
 │       └── sheet.tsx
 ├── components.json
 ├── db
@@ -36,7 +57,8 @@
 ├── eslint.config.mjs
 ├── lib
 │   ├── actions
-│   │   └── product.action.ts
+│   │   ├── product.action.ts
+│   │   └── user.action.ts
 │   ├── constants
 │   │   └── index.ts
 │   ├── utils.ts
@@ -49,6 +71,8 @@
 ├── prisma
 │   ├── migrations
 │   │   ├── 20250115145146_init
+│   │   │   └── migration.sql
+│   │   ├── 20250119114147_add_user_based_tables
 │   │   │   └── migration.sql
 │   │   └── migration_lock.toml
 │   └── schema.prisma
@@ -77,4 +101,4 @@
 └── types
     └── index.ts
 
-20 directories, 58 files
+29 directories, 73 files

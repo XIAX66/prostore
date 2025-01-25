@@ -2,16 +2,16 @@
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { signInDefaultValues } from "@/lib/constants";
+import { signUpDefaultValues } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { signInWithCredentials } from "@/lib/actions/user.action";
+import { signUpUser } from "@/lib/actions/user.action";
 import { useSearchParams } from "next/navigation";
 
-const CredentialsSignInForm = () => {
-  const [data, action] = useActionState(signInWithCredentials, {
+const SignUpForm = () => {
+  const [data, action] = useActionState(signUpUser, {
     success: false,
     message: "",
   });
@@ -19,12 +19,12 @@ const CredentialsSignInForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
 
-  const SignInButton = () => {
+  const SignUpButton = () => {
     const { pending } = useFormStatus();
 
     return (
       <Button disabled={pending} className="w-full" variant="default">
-        {pending ? "登陆中..." : "登陆"}
+        {pending ? "注册中..." : "注册"}
       </Button>
     );
   };
@@ -34,6 +34,17 @@ const CredentialsSignInForm = () => {
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-6">
         <div>
+          <Label htmlFor="name">名称</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            required
+            autoComplete="name"
+            defaultValue={signUpDefaultValues.name}
+          />
+        </div>
+        <div>
           <Label htmlFor="email">邮箱</Label>
           <Input
             id="email"
@@ -41,7 +52,7 @@ const CredentialsSignInForm = () => {
             type="email"
             required
             autoComplete="email"
-            defaultValue={signInDefaultValues.email}
+            defaultValue={signUpDefaultValues.email}
           />
         </div>
         <div>
@@ -52,11 +63,22 @@ const CredentialsSignInForm = () => {
             type="password"
             required
             autoComplete="password"
-            defaultValue={signInDefaultValues.password}
+            defaultValue={signUpDefaultValues.password}
           />
         </div>
         <div>
-          <SignInButton />
+          <Label htmlFor="confirmPassword">确认密码</Label>
+          <Input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            autoComplete="confirmPassword"
+            defaultValue={signUpDefaultValues.confirmPassword}
+          />
+        </div>
+        <div>
+          <SignUpButton />
         </div>
 
         {data && !data.success && (
@@ -64,9 +86,9 @@ const CredentialsSignInForm = () => {
         )}
 
         <div className="text-sm text-center text-muted-foreground">
-          没有账号？
+          已有账户？
           <Link href="/sign-up" target="_self" className="link">
-            注册一个
+            直接登录
           </Link>
         </div>
       </div>
@@ -74,4 +96,4 @@ const CredentialsSignInForm = () => {
   );
 };
 
-export default CredentialsSignInForm;
+export default SignUpForm;

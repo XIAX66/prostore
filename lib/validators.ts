@@ -25,3 +25,16 @@ export const signInFormSchema = z.object({
   email: z.string().email("邮箱格式不正确"),
   password: z.string().min(6, "密码至少6个字符"),
 });
+
+// Schema for signing up users
+export const signUpFormSchema = z
+  .object({
+    name: z.string().min(3, "名字至少3个字符"),
+    email: z.string().email("邮箱格式不正确"),
+    password: z.string().min(6, "密码至少6个字符"),
+    confirmPassword: z.string().min(6, "密码至少6个字符"),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "密码不匹配",
+    path: ["confirmPassword"],
+  });

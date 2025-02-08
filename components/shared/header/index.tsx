@@ -9,7 +9,7 @@ const Header = () => {
       <div className="wrapper flex-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="images/logo.svg"
+            src="/images/logo.svg"
             alt={`${APP_NAME} logo`}
             width={48}
             height={48}

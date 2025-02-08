@@ -4,7 +4,7 @@ import { formatNumberWithDecimal } from "./utils";
 const currency = z
   .string()
   .refine(
-    (val) => /^\d+(\.\d{2})?¥/.test(formatNumberWithDecimal(Number(val))),
+    (val) => /^\d+(\.\d{2})/.test(formatNumberWithDecimal(Number(val))),
     "价格格式不正确"
   );
 
@@ -59,4 +59,15 @@ export const insertCartSchema = z.object({
   taxPrice: currency,
   sessionCartId: z.string().min(1, "Sesstion cart id is required"),
   userId: z.string().optional().nullable(),
+});
+
+// Schema for the shipping address
+export const shippingAddressSchema = z.object({
+  fullName: z.string().min(1, "名称不能为空"),
+  streetAddress: z.string().min(1, "地址不能为空"),
+  city: z.string().min(1, "城市不能为空"),
+  postalCode: z.string().min(1, "邮编码不能为空"),
+  country: z.string().min(1, "国家不能为空"),
+  lat: z.number().optional(),
+  lng: z.number().optional(),
 });

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
+import { PAYMENT_METHODS } from "./constants";
 
 const currency = z
   .string()
@@ -70,4 +71,45 @@ export const shippingAddressSchema = z.object({
   country: z.string().min(1, "国家不能为空"),
   lat: z.number().optional(),
   lng: z.number().optional(),
+});
+
+// Schema for payment methods
+export const paymentMethodSchema = z
+  .object({
+    type: z.string().min(1, "支付方法不能为空"),
+  })
+  .refine((data) => PAYMENT_METHODS.includes(data.type), {
+    path: ["type"],
+    message: "无效支付方法",
+  });
+
+// Shcema for inserting order
+export const insertOrderSchema = z.object({
+  userId: z.string().min(1, "用户不能为空"),
+  itemsPrice: currency,
+  shippingPrice: currency,
+  taxPrice: currency,
+  totalPrice: currency,
+  paymentMethod: z.string().refine((data) => PAYMENT_METHODS.includes(data), {
+    message: "无效支付方法",
+  }),
+  shippingAddress: shippingAddressSchema,
+});
+
+// Schema for inserting an order item
+export const insertOrderItemSchema = z.object({
+  productId: z.string(),
+  slug: z.string(),
+  image: z.string(),
+  name: z.string(),
+  price: currency,
+  qty: z.number(),
+});
+
+// Schema for payment result
+export const paymentResultSchema = z.object({
+  id: z.string(),
+  status: z.string(),
+  email_address: z.string(),
+  pricePaid: z.string(),
 });

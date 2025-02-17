@@ -60,6 +60,23 @@ const UserButton = async () => {
               </Button>
             </form>
           </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link className="w-full" href="/user/profile">
+              用户信息
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link className="w-full" href="/user/orders">
+              订单历史
+            </Link>
+          </DropdownMenuItem>
+          {session?.user?.role === "admin" && (
+            <DropdownMenuItem>
+              <Link href="/admin/overview" className="w-full">
+                系统管理
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

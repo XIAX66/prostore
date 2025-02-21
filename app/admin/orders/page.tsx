@@ -19,10 +19,10 @@ export const metadata: Metadata = {
   title: "Admin Orders",
 };
 
-const OrdersPage = async (props: {
-  searchParams: Promise<{ page: string }>;
+const AdminOrdersPage = async (props: {
+  searchParams: Promise<{ page: string; query: string }>;
 }) => {
-  const { page = "1" } = await props.searchParams;
+  const { page = "1", query: searchText } = await props.searchParams;
 
   const session = await auth();
   if (session?.user.role !== "admin")
@@ -30,19 +30,31 @@ const OrdersPage = async (props: {
 
   const orders = await getAllOrders({
     page: Number(page),
+    query: searchText,
   });
 
   console.log(orders);
 
   return (
     <div className="space-y-2">
-      <h2 className="h2-bold">订单</h2>
+      <h1 className="h2-bold">订单</h1>
+      {searchText && (
+        <div>
+          关键词筛选: <i>&quot;{searchText}&quot;</i>{" "}
+          <Link href={`/admin/orders`}>
+            <Button variant="outline" size="sm">
+              移除筛选
+            </Button>
+          </Link>
+        </div>
+      )}
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
               <TableHead>ID</TableHead>
               <TableHead>DATE</TableHead>
+              <TableHead>BUYER</TableHead>
               <TableHead>TOTAL</TableHead>
               <TableHead>PAID</TableHead>
               <TableHead>DELIVERED</TableHead>
@@ -56,6 +68,7 @@ const OrdersPage = async (props: {
                 <TableCell>
                   {formatDateTime(order.createdAt).dateTime}
                 </TableCell>
+                <TableCell>{order.user.name}</TableCell>
                 <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                 <TableCell>
                   {order.isPaid && order.paidAt
@@ -88,4 +101,4 @@ const OrdersPage = async (props: {
   );
 };
 
-export default OrdersPage;
+export default AdminOrdersPage;

@@ -46,13 +46,8 @@ export default function DeleteDialog({
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button
-          variant="destructive"
-          size="sm"
-          disabled={isPending}
-          onClick={handleDeleteClick}
-        >
-          {isPending ? "删除中..." : "删除"}
+        <Button size="sm" variant="destructive" className="ml-2">
+          删除
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
@@ -62,6 +57,14 @@ export default function DeleteDialog({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>取消</AlertDialogCancel>
+          <Button
+            variant="destructive"
+            size="sm"
+            disabled={isPending}
+            onClick={handleDeleteClick}
+          >
+            {isPending ? "删除中..." : "删除"}
+          </Button>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

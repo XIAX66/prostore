@@ -28,6 +28,7 @@ const AdminOverviewPage = async () => {
 
   // Get order summary
   const summary = await getOrderSummary();
+  console.log(summary);
 
   return (
     <div className="space-y-2">
@@ -40,7 +41,11 @@ const AdminOverviewPage = async () => {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {formatCurrency(summary.totalSales._sum.totalPrice!.toString())}
+              {formatCurrency(
+                summary.totalSales._sum.totalPrice
+                  ? summary.totalSales._sum.totalPrice.toString()
+                  : 0
+              )}
             </div>
           </CardContent>
         </Card>
@@ -113,7 +118,7 @@ const AdminOverviewPage = async () => {
                     <TableCell>{formatCurrency(order.totalPrice)}</TableCell>
                     <TableCell>
                       <Link href={`/order/${order.id}`}>
-                        <span className="px-2">Details</span>
+                        <span className="px-2">详情</span>
                       </Link>
                     </TableCell>
                   </TableRow>

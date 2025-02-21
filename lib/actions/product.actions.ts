@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use server";
 import { prisma } from "@/db/prisma";
 import { formatError, prismaToObject } from "../utils";

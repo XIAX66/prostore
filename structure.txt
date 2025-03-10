@@ -10,59 +10,154 @@
 │   │       ├── page.tsx
 │   │       └── sign-up-form.tsx
 │   ├── (root)
+│   │   ├── cart
+│   │   │   ├── cart-table.tsx
+│   │   │   └── page.tsx
 │   │   ├── layout.tsx
+│   │   ├── order
+│   │   │   └── [id]
+│   │   │       ├── order-details-table.tsx
+│   │   │       ├── page.tsx
+│   │   │       ├── stripe-payment-success
+│   │   │       │   └── page.tsx
+│   │   │       └── stripe-payment.tsx
 │   │   ├── page.tsx
-│   │   └── product
-│   │       └── [slug]
-│   │           └── page.tsx
+│   │   ├── payment-method
+│   │   │   ├── page.tsx
+│   │   │   └── payment-method-form.tsx
+│   │   ├── place-order
+│   │   │   ├── page.tsx
+│   │   │   └── place-order-form.tsx
+│   │   ├── product
+│   │   │   └── [slug]
+│   │   │       ├── page.tsx
+│   │   │       ├── review-form.tsx
+│   │   │       └── review-list.tsx
+│   │   ├── search
+│   │   │   └── page.tsx
+│   │   └── shipping-address
+│   │       ├── page.tsx
+│   │       └── shipping-address-form.tsx
+│   ├── admin
+│   │   ├── layout.tsx
+│   │   ├── main-nav.tsx
+│   │   ├── orders
+│   │   │   └── page.tsx
+│   │   ├── overview
+│   │   │   ├── charts.tsx
+│   │   │   └── page.tsx
+│   │   ├── products
+│   │   │   ├── [id]
+│   │   │   │   └── page.tsx
+│   │   │   ├── create
+│   │   │   │   └── page.tsx
+│   │   │   └── page.tsx
+│   │   └── users
+│   │       ├── [id]
+│   │       │   ├── page.tsx
+│   │       │   └── update-user-form.tsx
+│   │       └── page.tsx
 │   ├── api
-│   │   └── auth
-│   │       └── [...nextauth]
+│   │   ├── auth
+│   │   │   └── [...nextauth]
+│   │   │       └── route.ts
+│   │   ├── uploadthing
+│   │   │   ├── core.ts
+│   │   │   └── route.ts
+│   │   └── webhooks
+│   │       └── stripe
 │   │           └── route.ts
 │   ├── favicon.ico
 │   ├── globals.css
 │   ├── layout.tsx
 │   ├── loading.tsx
-│   └── not-found.tsx
+│   ├── not-found.tsx
+│   └── user
+│       ├── layout.tsx
+│       ├── main-nav.tsx
+│       ├── orders
+│       │   └── page.tsx
+│       └── profile
+│           ├── page.tsx
+│           └── profile-form.tsx
 ├── assets
 │   └── loader.gif
 ├── auth.ts
 ├── components
+│   ├── admin
+│   │   ├── admin-search.tsx
+│   │   └── product-form.tsx
+│   ├── deal-countdown.tsx
 │   ├── footer.tsx
+│   ├── icon-boxes.tsx
 │   ├── shared
+│   │   ├── checkout-steps.tsx
+│   │   ├── delete-dialog.tsx
 │   │   ├── header
+│   │   │   ├── categories-drawer.tsx
 │   │   │   ├── index.tsx
 │   │   │   ├── menu.tsx
 │   │   │   ├── mode-toggle.tsx
+│   │   │   ├── search.tsx
 │   │   │   └── user-button.tsx
+│   │   ├── pagination.tsx
 │   │   └── product
+│   │       ├── add-to-cart.tsx
 │   │       ├── product-card.tsx
+│   │       ├── product-carousel.tsx
 │   │       ├── product-images.tsx
 │   │       ├── product-list.tsx
-│   │       └── product-price.tsx
-│   └── ui
-│       ├── badge.tsx
-│       ├── button.tsx
-│       ├── card.tsx
-│       ├── dropdown-menu.tsx
-│       ├── input.tsx
-│       ├── label.tsx
-│       └── sheet.tsx
+│   │       ├── product-price.tsx
+│   │       └── ratings.tsx
+│   ├── ui
+│   │   ├── alert-dialog.tsx
+│   │   ├── badge.tsx
+│   │   ├── button.tsx
+│   │   ├── card.tsx
+│   │   ├── carousel.tsx
+│   │   ├── checkbox.tsx
+│   │   ├── dialog.tsx
+│   │   ├── drawer.tsx
+│   │   ├── dropdown-menu.tsx
+│   │   ├── form.tsx
+│   │   ├── input.tsx
+│   │   ├── label.tsx
+│   │   ├── radio-group.tsx
+│   │   ├── select.tsx
+│   │   ├── sheet.tsx
+│   │   ├── table.tsx
+│   │   ├── textarea.tsx
+│   │   ├── toast.tsx
+│   │   └── toaster.tsx
+│   └── view-all-products-button.tsx
 ├── components.json
 ├── db
 │   ├── prisma.ts
 │   ├── sample-data.ts
 │   ├── script.js
 │   └── seed.ts
+├── email
+│   ├── index.tsx
+│   └── purchase-receipt.tsx
 ├── eslint.config.mjs
+├── hooks
+│   └── use-toast.ts
+├── jest.config.ts
+├── jest.setup.ts
 ├── lib
 │   ├── actions
-│   │   ├── product.action.ts
-│   │   └── user.action.ts
+│   │   ├── cart.actions.ts
+│   │   ├── order.actions.ts
+│   │   ├── product.actions.ts
+│   │   ├── review.actions.ts
+│   │   └── user.actions.ts
 │   ├── constants
 │   │   └── index.ts
+│   ├── paypal.ts
+│   ├── uploadthing.ts
 │   ├── utils.ts
 │   └── validators.ts
+├── middleware.ts
 ├── next-env.d.ts
 ├── next.config.ts
 ├── package-lock.json
@@ -73,6 +168,14 @@
 │   │   ├── 20250115145146_init
 │   │   │   └── migration.sql
 │   │   ├── 20250119114147_add_user_based_tables
+│   │   │   └── migration.sql
+│   │   ├── 20250205072516_add_cart
+│   │   │   └── migration.sql
+│   │   ├── 20250209061831_add_order
+│   │   │   └── migration.sql
+│   │   ├── 20250209110223_add_order
+│   │   │   └── migration.sql
+│   │   ├── 20250221073427_add_review
 │   │   │   └── migration.sql
 │   │   └── migration_lock.toml
 │   └── schema.prisma
@@ -97,8 +200,11 @@
 │           └── p6-2.jpg
 ├── structure.txt
 ├── tailwind.config.ts
+├── test
+│   └── paypal.test.ts
 ├── tsconfig.json
 └── types
-    └── index.ts
+    ├── index.ts
+    └── next-auth.d.ts
 
-29 directories, 73 files
+59 directories, 149 files

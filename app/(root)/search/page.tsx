@@ -216,7 +216,9 @@ const SearchPage = async (props: {
             rating !== "all" ||
             price !== "all" ? (
               <Button variant={"link"} asChild>
-                <Link href="/search">清除</Link>
+                <Link href="/search">
+                  <strong>点击清除</strong>
+                </Link>
               </Button>
             ) : null}
           </div>
